@@ -28,11 +28,15 @@
   "author": "Mondal Ankan <mondalankan2007@gmail.com>",
   "type": "module",
   "main": "./src/index.js",
+  "types": "./types/index.d.ts",
   "bin": {
     "seo-toolkit": "./cli/index.js"
   },
   "exports": {
-    ".": "./src/index.js",
+    ".": {
+      "types": "./types/index.d.ts",
+      "default": "./src/index.js"
+    },
     "./package.json": "./package.json"
   },
   "files": [
