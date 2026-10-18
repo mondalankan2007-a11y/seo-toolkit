@@ -10,4 +10,5 @@ export { generateOpenGraph } from "./meta/openGraph.js";
 export { generateTwitterCard } from "./meta/twitter.js";
 export { validateMeta } from "./meta/validateMeta.js";
 export { generateSitemap, generateSitemapIndex } from "./sitemap/generateSitemap.js";
+export { generateRobots } from "./robots/generateRobots.js";
 export { SeoError, SeoValidationError } from "./errors/SeoError.js";
