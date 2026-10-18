@@ -30,4 +30,5 @@ export {
   analyzeJsonLd,
   calculateScore
 } from "./analyzer/index.js";
+export { fetchPage, analyzePage } from "./crawler/index.js";
 export { SeoError, SeoValidationError } from "./errors/SeoError.js";
