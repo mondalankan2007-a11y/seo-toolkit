@@ -1,4 +1,5 @@
 import { escapeHtml } from "../utils/escapeHtml.js";
+import { generateOpenGraph } from "./openGraph.js";
 
 /**
  * Generates standard SEO HTML meta and link tags.
@@ -12,6 +13,7 @@ import { escapeHtml } from "../utils/escapeHtml.js";
  * @param {string} [options.viewport] - Viewport setting.
  * @param {string|string[]} [options.keywords] - Keywords for the page.
  * @param {string} [options.author] - Author name.
+ * @param {Object} [options.openGraph] - Open Graph options.
  * @param {Array<Object>} [options.extra] - Additional arbitrary meta tags.
  * @returns {{ tags: Array<Object>, toHtml: () => string, toString: () => string }}
  */
@@ -25,6 +27,7 @@ export function generateMeta(options = {}) {
     viewport,
     keywords,
     author,
+    openGraph,
     extra = []
   } = options;
 
@@ -61,6 +64,13 @@ export function generateMeta(options = {}) {
   if (keywords) {
     const kwValue = Array.isArray(keywords) ? keywords.join(", ") : keywords;
     tags.push({ tag: "meta", name: "keywords", content: kwValue });
+  }
+
+  if (openGraph && typeof openGraph === "object") {
+    const ogResult = generateOpenGraph(openGraph);
+    for (const ogTag of ogResult.tags) {
+      tags.push({ tag: "meta", ...ogTag });
+    }
   }
 
   if (Array.isArray(extra)) {
