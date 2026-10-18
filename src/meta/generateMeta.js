@@ -1,6 +1,7 @@
 import { escapeHtml } from "../utils/escapeHtml.js";
 import { generateOpenGraph } from "./openGraph.js";
 import { generateTwitterCard } from "./twitter.js";
+import { validateMeta } from "./validateMeta.js";
 
 /**
  * Generates standard SEO HTML meta and link tags.
@@ -17,9 +18,15 @@ import { generateTwitterCard } from "./twitter.js";
  * @param {Object} [options.openGraph] - Open Graph options.
  * @param {Object} [options.twitter] - Twitter Card options.
  * @param {Array<Object>} [options.extra] - Additional arbitrary meta tags.
- * @returns {{ tags: Array<Object>, toHtml: () => string, toString: () => string }}
+ * @param {Object} [config] - Configuration options.
+ * @param {boolean} [config.validate=false] - Whether to validate input before generating.
+ * @returns {{ tags: Array<Object>, toHtml: () => string, toString: () => string, validation?: Object }}
  */
-export function generateMeta(options = {}) {
+export function generateMeta(options = {}, config = {}) {
+  if (config.validate) {
+    validateMeta(options, { throwOnError: true });
+  }
+
   const {
     title,
     description,
