@@ -83,7 +83,9 @@ export function findTags(html, tagName) {
     // Tags with closing counterpart like <title>...</title>, <h1>...</h1>, <script>...</script>
     const regex = new RegExp(`<${lowerTag}(\\s+[^>]*?)?>([\\s\\S]*?)<\\/${lowerTag}>`, "gi");
     let match;
+    let matchedAny = false;
     while ((match = regex.exec(html)) !== null) {
+      matchedAny = true;
       const rawAttrs = match[1] || "";
       const innerHtml = match[2] || "";
       results.push({
@@ -92,6 +94,23 @@ export function findTags(html, tagName) {
         innerHtml,
         text: stripTags(innerHtml)
       });
+    }
+
+    // Resilient fallback for unclosed tags (e.g. malformed HTML where tag is unclosed before next tag or EOF)
+    if (!matchedAny) {
+      const unclosedRegex = new RegExp(`<${lowerTag}(\\s+[^>]*?)?>([\\s\\S]*?)(?=<[a-zA-Z!/]|$)`, "gi");
+      while ((match = unclosedRegex.exec(html)) !== null) {
+        const rawAttrs = match[1] || "";
+        const innerHtml = match[2] || "";
+        if (innerHtml.trim() || rawAttrs.trim()) {
+          results.push({
+            raw: match[0],
+            attributes: parseTagAttributes(rawAttrs),
+            innerHtml,
+            text: stripTags(innerHtml)
+          });
+        }
+      }
     }
   }
 

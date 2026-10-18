@@ -20,6 +20,39 @@ export function calculateScore(analysis) {
     };
   }
 
+  // If page is completely devoid of content
+  const hasAnyContent = Boolean(
+    analysis.title?.present ||
+    analysis.description?.present ||
+    (analysis.headings?.totalHeadings > 0) ||
+    (analysis.images?.total > 0) ||
+    analysis.canonical?.present ||
+    analysis.openGraph?.present ||
+    analysis.jsonLd?.present
+  );
+
+  if (!hasAnyContent) {
+    return {
+      score: 0,
+      maxScore: 100,
+      percentage: 0,
+      rating: "Poor",
+      breakdown: {
+        title: { score: 0, max: 10, message: "Missing title", passed: false },
+        description: { score: 0, max: 10, message: "Missing meta description", passed: false },
+        h1: { score: 0, max: 10, message: "Missing <h1> heading", passed: false },
+        headingsStructure: { score: 0, max: 10, message: "No headings found", passed: false },
+        canonical: { score: 0, max: 10, message: "Missing canonical link", passed: false },
+        images: { score: 0, max: 10, message: "No images found", passed: false },
+        openGraph: { score: 0, max: 10, message: "Missing Open Graph tags", passed: false },
+        structuredData: { score: 0, max: 10, message: "No structured data", passed: false },
+        mobile: { score: 0, max: 10, message: "Missing viewport", passed: false },
+        crawlability: { score: 0, max: 10, message: "No content", passed: false }
+      },
+      disclaimer: "Technical SEO Health Score is an automated audit tool for web best practices. It does not represent search engine ranking algorithms."
+    };
+  }
+
   const breakdown = {};
 
   // 1. Title (10 points)
