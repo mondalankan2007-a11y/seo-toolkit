@@ -27,6 +27,7 @@ export {
   analyzeImages,
   analyzeCanonical,
   analyzeOpenGraph,
-  analyzeJsonLd
+  analyzeJsonLd,
+  calculateScore
 } from "./analyzer/index.js";
 export { SeoError, SeoValidationError } from "./errors/SeoError.js";

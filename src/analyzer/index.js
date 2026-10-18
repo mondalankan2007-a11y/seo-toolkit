@@ -6,4 +6,5 @@ export { analyzeImages } from "./analyzeImages.js";
 export { analyzeCanonical } from "./analyzeCanonical.js";
 export { analyzeOpenGraph } from "./analyzeOpenGraph.js";
 export { analyzeJsonLd } from "./analyzeJsonLd.js";
+export { calculateScore } from "./calculateScore.js";
 export { decodeHtmlEntities, stripTags, parseTagAttributes, findTags } from "./htmlParser.js";

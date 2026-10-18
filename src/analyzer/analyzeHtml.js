@@ -5,13 +5,14 @@ import { analyzeImages } from "./analyzeImages.js";
 import { analyzeCanonical } from "./analyzeCanonical.js";
 import { analyzeOpenGraph } from "./analyzeOpenGraph.js";
 import { analyzeJsonLd } from "./analyzeJsonLd.js";
+import { calculateScore } from "./calculateScore.js";
 import { findTags } from "./htmlParser.js";
 
 /**
  * Performs full technical SEO analysis on an HTML document string.
  *
  * @param {string} html - Raw HTML source code of the webpage.
- * @returns {Object} Comprehensive analysis object containing results and issues.
+ * @returns {Object} Comprehensive analysis object containing results, issues, and score.
  */
 export function analyzeHtml(html) {
   if (typeof html !== "string") {
@@ -66,7 +67,7 @@ export function analyzeHtml(html) {
   const warnings = allIssues.filter((i) => i.type === "warning");
   const info = allIssues.filter((i) => i.type === "info");
 
-  return {
+  const intermediate = {
     title,
     description,
     headings,
@@ -78,7 +79,14 @@ export function analyzeHtml(html) {
       robots: robotsDirective,
       viewport,
       charset
-    },
+    }
+  };
+
+  const score = calculateScore(intermediate);
+
+  return {
+    ...intermediate,
+    score,
     issues: {
       errors,
       warnings,
