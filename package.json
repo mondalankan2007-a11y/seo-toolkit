@@ -30,7 +30,7 @@
   "main": "./src/index.js",
   "types": "./types/index.d.ts",
   "bin": {
-    "seo-toolkit": "./cli/index.js"
+    "seo-toolkit": "cli/index.js"
   },
   "exports": {
     ".": {
