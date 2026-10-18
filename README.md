@@ -2,7 +2,7 @@
 
 > A production-grade, zero-dependency technical SEO suite for Node.js and modern web applications. Generate metadata, sitemaps, robots.txt, Schema.org JSON-LD structured data, and perform automated technical SEO audits via code or CLI.
 
-[![npm version](https://img.shields.io/badge/npm-v1.0.0-blue.svg)](https://www.npmjs.com/package/seo-toolkit)
+[![npm version](https://img.shields.io/badge/npm-v1.0.0-blue.svg)](https://www.npmjs.com/package/@ankan_/seo-toolkit)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Node.js CI](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen.svg)](https://nodejs.org)
 [![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue.svg)](https://www.typescriptlang.org/)
@@ -41,7 +41,7 @@
 - **In-Depth Webpage SEO Analyzer**: Inspects HTML documents for critical SEO markers including single H1 hierarchy, missing alt attributes, and social metadata.
 - **Transparent Health Scoring**: 100-point Technical SEO Health Score evaluating 10 key technical ranking and accessibility criteria.
 - **Built-in Webpage Crawler**: Audit live websites directly over HTTP/HTTPS with redirect tracking, timeouts, and network failure resiliency.
-- **Interactive CLI**: Instant audits in your terminal via `npx seo-toolkit analyze <url>` with clear colored diagnostic reports.
+- **Interactive CLI**: Instant audits in your terminal via `npx @ankan_/seo-toolkit analyze <url>` with clear colored diagnostic reports.
 - **First-Class TypeScript Support**: Full typings provided in `.d.ts` definitions.
 - **Zero Runtime Dependencies**: Ultra-fast execution, negligible bundle footprint, and zero third-party supply-chain risk.
 
@@ -52,13 +52,13 @@
 Install using npm, yarn, or pnpm:
 
 ```bash
-npm install seo-toolkit
+npm install @ankan_/seo-toolkit
 ```
 
 Or run directly without installation via `npx`:
 
 ```bash
-npx seo-toolkit analyze https://example.com
+npx @ankan_/seo-toolkit analyze https://example.com
 ```
 
 ---
@@ -338,16 +338,16 @@ console.log("Warnings:", result.issues.warnings);
 
 ```bash
 # Analyze a live website
-npx seo-toolkit analyze https://example.com
+npx @ankan_/seo-toolkit analyze https://example.com
 
 # Output audit as JSON
-npx seo-toolkit analyze https://example.com --json
+npx @ankan_/seo-toolkit analyze https://example.com --json
 
 # Generate a sitemap.xml
-npx seo-toolkit sitemap --hostname https://example.com --routes /,/about,/pricing --out public/sitemap.xml
+npx @ankan_/seo-toolkit sitemap --hostname https://example.com --routes /,/about,/pricing --out public/sitemap.xml
 
 # Generate robots.txt
-npx seo-toolkit robots --sitemap https://example.com/sitemap.xml --disallow /admin --out public/robots.txt
+npx @ankan_/seo-toolkit robots --sitemap https://example.com/sitemap.xml --disallow /admin --out public/robots.txt
 ```
 
 ### Sample CLI Terminal Output
