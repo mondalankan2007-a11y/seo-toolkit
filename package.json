@@ -1,8 +1,47 @@
 {
   "name": "seo-toolkit",
   "version": "0.1.0",
+  "description": "Comprehensive technical SEO toolkit for modern web applications - meta tags, Open Graph, Twitter cards, sitemaps, robots.txt, Schema.org JSON-LD, webpage crawler, and SEO health audit.",
+  "keywords": [
+    "seo",
+    "technical-seo",
+    "meta-tags",
+    "open-graph",
+    "twitter-cards",
+    "sitemap",
+    "robots-txt",
+    "schema-org",
+    "json-ld",
+    "crawler",
+    "audit",
+    "analyzer"
+  ],
+  "homepage": "https://github.com/mondalankan2007-a11y/seo-toolkit#readme",
+  "bugs": {
+    "url": "https://github.com/mondalankan2007-a11y/seo-toolkit/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mondalankan2007-a11y/seo-toolkit.git"
+  },
+  "license": "MIT",
+  "author": "Mondal Ankan <mondalankan2007@gmail.com>",
   "type": "module",
-  "main": "src/index.js",
+  "main": "./src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "src",
+    "cli",
+    "types",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "scripts": {
     "test": "node --test"
   }
