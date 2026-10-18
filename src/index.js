@@ -19,4 +19,14 @@ export {
   generateProduct,
   generateBreadcrumbList
 } from "./structured-data/index.js";
+export {
+  analyzeHtml,
+  analyzeTitle,
+  analyzeDescription,
+  analyzeHeadings,
+  analyzeImages,
+  analyzeCanonical,
+  analyzeOpenGraph,
+  analyzeJsonLd
+} from "./analyzer/index.js";
 export { SeoError, SeoValidationError } from "./errors/SeoError.js";
