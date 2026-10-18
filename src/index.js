@@ -11,4 +11,12 @@ export { generateTwitterCard } from "./meta/twitter.js";
 export { validateMeta } from "./meta/validateMeta.js";
 export { generateSitemap, generateSitemapIndex } from "./sitemap/generateSitemap.js";
 export { generateRobots } from "./robots/generateRobots.js";
+export {
+  generateJsonLd,
+  generatePerson,
+  generateOrganization,
+  generateArticle,
+  generateProduct,
+  generateBreadcrumbList
+} from "./structured-data/index.js";
 export { SeoError, SeoValidationError } from "./errors/SeoError.js";
