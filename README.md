@@ -2,7 +2,7 @@
 
 > A production-grade, zero-dependency technical SEO suite for Node.js and modern web applications. Generate metadata, sitemaps, robots.txt, Schema.org JSON-LD structured data, and perform automated technical SEO audits via code or CLI.
 
-[![npm version](https://img.shields.io/badge/npm-v1.1.0-blue.svg)](https://www.npmjs.com/package/@ankan_/seo-toolkit)
+[![npm version](https://img.shields.io/badge/npm-v1.1.1-blue.svg)](https://www.npmjs.com/package/@ankan_/seo-toolkit)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Node.js CI](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen.svg)](https://nodejs.org)
 [![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue.svg)](https://www.typescriptlang.org/)

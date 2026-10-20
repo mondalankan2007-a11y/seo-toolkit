@@ -4,5 +4,5 @@ import { VERSION } from "../src/index.js";
 
 test("package exports version", () => {
   assert.equal(typeof VERSION, "string");
-  assert.equal(VERSION, "1.1.0");
+  assert.equal(VERSION, "1.1.1");
 });
