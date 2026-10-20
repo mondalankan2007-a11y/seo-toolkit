@@ -5,10 +5,12 @@ import { generateOrganization } from "./organization.js";
 import { generateArticle } from "./article.js";
 import { generateProduct } from "./product.js";
 import { generateBreadcrumbList } from "./breadcrumb.js";
+import { generateFAQPage } from "./faq.js";
+import { generateHowTo } from "./howto.js";
 
 /**
  * Universal JSON-LD Schema.org structured data generator.
- * Accepts typed input (Person, Organization, Article, Product, BreadcrumbList) or custom schema data.
+ * Accepts typed input (Person, Organization, Article, Product, BreadcrumbList, FAQPage, HowTo) or custom schema data.
  *
  * @param {Object|Array} schemaData
  * @param {Object} [options]
@@ -48,6 +50,12 @@ export function generateJsonLd(schemaData, options = {}) {
     case "BreadcrumbList":
       result = generateBreadcrumbList(schemaData.items || schemaData.itemListElement || []);
       break;
+    case "FAQPage":
+      result = generateFAQPage(schemaData.questions || schemaData.items || schemaData.mainEntity || schemaData);
+      break;
+    case "HowTo":
+      result = generateHowTo(schemaData);
+      break;
     default: {
       const normalized = {
         "@context": "https://schema.org",
@@ -71,5 +79,7 @@ export {
   generateArticle,
   generateProduct,
   generateBreadcrumbList,
+  generateFAQPage,
+  generateHowTo,
   formatJsonLdScript
 };

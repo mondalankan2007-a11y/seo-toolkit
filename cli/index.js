@@ -19,10 +19,12 @@ USAGE:
 
 COMMANDS:
   analyze <url>     Audit webpage SEO health (meta, headings, og, json-ld, score)
+  check <url>       CI/CD quality gate check with threshold enforcement
   sitemap           Generate standard sitemap.xml
   robots            Generate standard robots.txt
 
 OPTIONS:
+  --min-score <n>   Fail with exit code 1 if score is below threshold (CI/CD)
   --json            Output results as formatted JSON (analyze command)
   --out <file>      Write generated sitemap or robots output to file
   --hostname <url>  Base domain for sitemap generation
@@ -35,6 +37,7 @@ OPTIONS:
 
 EXAMPLES:
   $ npx seo-toolkit analyze https://example.com
+  $ npx seo-toolkit check https://example.com --min-score 85
   $ npx seo-toolkit analyze https://example.com --json
   $ npx seo-toolkit sitemap --hostname https://example.com --routes /,/about,/pricing
   $ npx seo-toolkit robots --sitemap https://example.com/sitemap.xml --disallow /admin
@@ -56,21 +59,35 @@ async function main() {
 
   try {
     switch (command) {
+      case "check":
       case "analyze": {
         const url = args[1];
         if (!url || url.startsWith("-")) {
           console.error("Error: Please provide a valid URL to analyze.");
-          console.error("Usage: seo-toolkit analyze <url>");
+          console.error("Usage: seo-toolkit analyze <url> [--min-score <threshold>]");
           process.exit(1);
         }
 
         const isJson = args.includes("--json");
+        const minScoreIndex = args.indexOf("--min-score");
+        const minScore = minScoreIndex !== -1 ? parseInt(args[minScoreIndex + 1], 10) : null;
+
         const audit = await analyzePage(url);
 
         if (isJson) {
           console.log(JSON.stringify(audit, null, 2));
         } else {
           console.log(formatAuditReport(audit));
+        }
+
+        if (minScore !== null && !isNaN(minScore)) {
+          const score = audit.score?.score ?? 0;
+          if (score < minScore) {
+            console.error(`\n✖ Quality Gate Failed: SEO health score (${score}/100) is below minimum threshold (${minScore}/100).`);
+            process.exit(1);
+          } else {
+            console.log(`\n✓ Quality Gate Passed: SEO health score (${score}/100) satisfies minimum threshold (${minScore}/100).`);
+          }
         }
         break;
       }

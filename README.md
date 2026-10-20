@@ -2,7 +2,7 @@
 
 > A production-grade, zero-dependency technical SEO suite for Node.js and modern web applications. Generate metadata, sitemaps, robots.txt, Schema.org JSON-LD structured data, and perform automated technical SEO audits via code or CLI.
 
-[![npm version](https://img.shields.io/badge/npm-v1.0.0-blue.svg)](https://www.npmjs.com/package/@ankan_/seo-toolkit)
+[![npm version](https://img.shields.io/badge/npm-v1.1.0-blue.svg)](https://www.npmjs.com/package/@ankan_/seo-toolkit)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Node.js CI](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen.svg)](https://nodejs.org)
 [![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue.svg)](https://www.typescriptlang.org/)
@@ -37,11 +37,11 @@
 - **Strict Metadata Validation**: Automated verification of title length (30–60 chars), description length (70–160 chars), absolute URL syntax, and image assets.
 - **XML Sitemaps & Indexing**: Generates standards-compliant `sitemap.xml` conforming to sitemaps.org protocols (supporting `loc`, `lastmod`, `changefreq`, and `priority`).
 - **Flexible robots.txt**: Define crawl rules, user-agents, disallow directives, crawl delays, and sitemap references.
-- **Schema.org Structured Data**: Pre-configured JSON-LD generators for `Person`, `Organization`, `Article`, `Product`, and `BreadcrumbList`.
+- **Schema.org Structured Data**: Pre-configured JSON-LD generators for `Person`, `Organization`, `Article`, `Product`, `BreadcrumbList`, `FAQPage`, and `HowTo`.
 - **In-Depth Webpage SEO Analyzer**: Inspects HTML documents for critical SEO markers including single H1 hierarchy, missing alt attributes, and social metadata.
 - **Transparent Health Scoring**: 100-point Technical SEO Health Score evaluating 10 key technical ranking and accessibility criteria.
 - **Built-in Webpage Crawler**: Audit live websites directly over HTTP/HTTPS with redirect tracking, timeouts, and network failure resiliency.
-- **Interactive CLI**: Instant audits in your terminal via `npx @ankan_/seo-toolkit analyze <url>` with clear colored diagnostic reports.
+- **Interactive CLI & CI/CD Gate**: Instant audits via `npx @ankan_/seo-toolkit analyze <url>` and automated CI assertion gates with `--min-score <n>`.
 - **First-Class TypeScript Support**: Full typings provided in `.d.ts` definitions.
 - **Zero Runtime Dependencies**: Ultra-fast execution, negligible bundle footprint, and zero third-party supply-chain risk.
 
@@ -280,6 +280,37 @@ const breadcrumbs = generateBreadcrumbList([
   { name: "Store", url: "https://example.com/store" },
   { name: "Keyboards" }
 ]);
+
+// FAQPage (Google Rich Snippets)
+import { generateFAQPage } from "seo-toolkit";
+
+const faq = generateFAQPage([
+  {
+    question: "What is seo-toolkit?",
+    answer: "A comprehensive technical SEO toolkit for modern web applications."
+  },
+  {
+    question: "Does it have external dependencies?",
+    answer: "No, it is 100% zero-dependency using native Node.js APIs."
+  }
+]);
+
+console.log(faq.toScript({ pretty: true }));
+
+// HowTo (Step-by-step Rich Results)
+import { generateHowTo } from "seo-toolkit";
+
+const howTo = generateHowTo({
+  name: "How to tie a Windsor Knot",
+  description: "A fast, clean guide to tying a full Windsor knot.",
+  totalTime: "PT5M",
+  steps: [
+    { name: "Step 1", text: "Drape the necktie over your shoulders." },
+    { name: "Step 2", text: "Cross wide end in front of narrow end." }
+  ]
+});
+
+console.log(howTo.toScript());
 ```
 
 ---
@@ -332,13 +363,16 @@ console.log("Warnings:", result.issues.warnings);
 
 ---
 
-## CLI
+## CLI & CI/CD Gate
 
-`seo-toolkit` includes a command-line interface for running audits and generating SEO assets.
+`seo-toolkit` includes a command-line interface for running audits, CI assertion quality gates, and generating SEO assets.
 
 ```bash
 # Analyze a live website
 npx @ankan_/seo-toolkit analyze https://example.com
+
+# CI/CD Quality Gate (Fails with exit code 1 if health score is under 90)
+npx @ankan_/seo-toolkit check https://example.com --min-score 90
 
 # Output audit as JSON
 npx @ankan_/seo-toolkit analyze https://example.com --json

@@ -225,6 +225,34 @@ export interface BreadcrumbItem {
   item?: string;
 }
 
+export interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+export interface FaqPageData {
+  questions?: FaqItem[];
+  items?: FaqItem[];
+  mainEntity?: any[];
+}
+
+export interface HowToStep {
+  name?: string;
+  text: string;
+  image?: string | string[];
+  url?: string;
+}
+
+export interface HowToData {
+  name: string;
+  description?: string;
+  steps: Array<HowToStep | string>;
+  totalTime?: string;
+  image?: string | string[];
+  supply?: string | string[] | Array<{ name: string }>;
+  tool?: string | string[] | Array<{ name: string }>;
+}
+
 // SEO Analysis & Score types
 export interface Issue {
   type: "error" | "warning" | "info";
@@ -398,6 +426,8 @@ export function generateOrganization(data: OrganizationData): SchemaResult;
 export function generateArticle(data: ArticleData): SchemaResult;
 export function generateProduct(data: ProductData): SchemaResult;
 export function generateBreadcrumbList(items: BreadcrumbItem[]): SchemaResult;
+export function generateFAQPage(data: FaqItem[] | FaqPageData): SchemaResult;
+export function generateHowTo(data: HowToData): SchemaResult;
 
 export function analyzeHtml(html: string): HtmlAnalysisResult;
 export function analyzeTitle(html: string): TitleAnalysis;

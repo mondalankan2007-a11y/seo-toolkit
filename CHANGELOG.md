@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2026-10-20
+
+### Added
+- **FAQPage Structured Data**: `generateFAQPage` generator for Google rich snippet accordion results with strict validation and safe script serialization.
+- **HowTo Structured Data**: `generateHowTo` generator supporting step-by-step guides, supplies, tools, duration, and rich schema markup.
+- **CLI CI/CD Quality Gate**: Added `check` command and `--min-score <n>` threshold parameter in CLI to fail automated CI pipelines (exit code 1) on SEO regressions.
+- **TypeScript Definitions**: Complete types for `FAQPage`, `HowTo`, and associated parameters.
+
 ## [1.0.0] - 2026-10-18
 
 ### Added

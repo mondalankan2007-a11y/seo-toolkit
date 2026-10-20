@@ -86,3 +86,9 @@ test("CLI sitemap generates sitemap.xml", async () => {
   assert.ok(stdout.includes("<loc>https://example.com/home</loc>"));
   assert.ok(stdout.includes("<loc>https://example.com/docs</loc>"));
 });
+
+test("CLI --help displays check and --min-score options", async () => {
+  const { stdout } = await execFileAsync("node", [cliPath, "--help"]);
+  assert.ok(stdout.includes("check <url>"));
+  assert.ok(stdout.includes("--min-score <n>"));
+});
